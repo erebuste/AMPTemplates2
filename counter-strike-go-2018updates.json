@@ -1,0 +1,21 @@
+[
+    {
+        "UpdateStageName":"Server.cfg Template File Download",
+        "UpdateSourcePlatform":"All",
+        "UpdateSource":"FetchURL",
+        "UpdateSourceData":"https://hvh.nexus/dl/counter-strike-go-2018server.cfg",
+        "UpdateSourceArgs":"server_template.cfg",
+        "UpdateSourceTarget":"{{$FullBaseDir}}",
+        "OverwriteExistingFiles":true
+    },
+    {
+        "UpdateStageName":"Game Download",
+        "UpdateSourcePlatform":"Linux",
+        "UpdateSource":"FetchURL",
+        "UpdateSourceData":"https://hvh.nexus/dl/csgo_2018_ds.tar.gz",
+        "UpdateSourceTarget":"{{$FullBaseDir}}",
+        "UnzipUpdateSource":true,
+        "OverwriteExistingFiles":true,
+        "DeleteAfterExtract":true
+    }
+]

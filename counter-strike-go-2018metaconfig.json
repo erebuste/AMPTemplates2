@@ -1,0 +1,8 @@
+[
+    {
+        "ConfigFile":"app/csgo/cfg/server.cfg",
+        "AutoMap":true,
+        "ConfigType":"template",
+        "ConfigFileTemplate":"server_template.cfg"
+    }
+]
