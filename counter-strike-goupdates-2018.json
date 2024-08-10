@@ -1,0 +1,102 @@
+[
+    {
+        "UpdateStageName":"Server Download",
+        "UpdateSourcePlatform":"Linux",
+        "UpdateSource":"FetchURL",
+        "UpdateSourceData":"https://dl-tagged.top/csgo_legacy_server.zip",
+        "UpdateSourceArgs":"csgo_legacy_server.zip",
+        "UpdateSourceTarget":"{{$FullBaseDir}}",
+        "UnzipUpdateSource":true,
+        "OverwriteExistingFiles":true,
+        "DeleteAfterExtract":true
+    },
+    {
+        "UpdateStageName":"Remove Old Library",
+        "UpdateSourcePlatform":"Linux",
+        "UpdateSource":"Executable",
+        "UpdateSourceData":"/bin/bash",
+        "UpdateSourceArgs":"-c 'rm -rf csgo_legacy/bin/libgcc_s.so.1 >/dev/null 2>&1'",
+        "SkipOnFailure":true
+    },
+    {
+        "UpdateStageName":"Server.cfg Template File Download",
+        "UpdateSourcePlatform":"All",
+        "UpdateSource":"FetchURL",
+        "UpdateSourceData":"https://raw.githubusercontent.com/CubeCoders/AMPTemplates/main/counter-strike-goserver.cfg",
+        "UpdateSourceArgs":"AMP_server.cfg",
+        "UpdateSourceTarget":"{{$FullRootDir}}",
+        "OverwriteExistingFiles":true
+    },
+    {
+        "UpdateStageName":"Metamod Download",
+        "UpdateSourcePlatform":"Linux",
+        "UpdateSource":"FetchURL",
+        "UpdateSourceData":"https://mms.alliedmods.net/mmsdrop/{{ModBranch}}/mmsource-{{ModBranch}}.0-git{{MetamodBuild}}-linux.tar.gz",
+        "UpdateSourceTarget":"{{$FullBaseDir}}csgo",
+        "UnzipUpdateSource":true,
+        "OverwriteExistingFiles":true,
+        "DeleteAfterExtract":true
+    },
+    {
+        "UpdateStageName":"SourceMod Download Directory Creation",
+        "UpdateSourcePlatform":"All",
+        "UpdateSource":"CreateDirectory",
+        "UpdateSourceArgs":"{{$FullBaseDir}}sm"
+    },
+    {
+        "UpdateStageName":"SourceMod Download",
+        "UpdateSourcePlatform":"Linux",
+        "UpdateSource":"FetchURL",
+        "UpdateSourceData":"https://sm.alliedmods.net/smdrop/{{ModBranch}}/sourcemod-{{ModBranch}}.0-git{{SourcemodBuild}}-linux.tar.gz",
+        "UpdateSourceTarget":"{{$FullBaseDir}}sm",
+        "UnzipUpdateSource":true,
+        "OverwriteExistingFiles":true,
+        "DeleteAfterExtract":true
+    },
+    {
+        "UpdateStageName":"SourceMod Installation",
+        "UpdateSourcePlatform":"Linux",
+        "UpdateSource":"Executable",
+        "UpdateSourceData":"/bin/bash",
+        "UpdateSourceArgs":"-c 'cd csgo_legacy && [ -d csgo/cfg/sourcemod ] && rm -rf sm/cfg/sourcemod >/dev/null 2>&1; [ -d csgo/addons/sourcemod/configs ] && rm -rf sm/addons/sourcemod/configs >/dev/null 2>&1; [ -d csgo/addons/sourcemod/plugins ] && rm -rf sm/addons/sourcemod/plugins >/dev/null 2>&1; \\cp -rf sm/* csgo/ >/dev/null 2>&1; rm -rf sm >/dev/null 2>&1'",
+        "SkipOnFailure":true
+    },
+    {
+        "UpdateStageName":"Activate Metamod and SourceMod",
+        "UpdateSourcePlatform":"All",
+        "UpdateSource":"CreateFile",
+        "UpdateSourceData":"\"Plugin\"\n{\n\t\"file\"\t\"../csgo/addons/metamod/bin/server\"\n}",
+        "UpdateSourceArgs":"{{$FullBaseDir}}csgo/addons/metamod.vdf",
+        "OverwriteExistingFiles":true
+    },
+    {
+        "UpdateStageName":"NoLobbyReservation Plugin Download",
+        "UpdateSourcePlatform":"All",
+        "UpdateSource":"GithubRelease",
+        "UpdateSourceArgs":"vanz666/NoLobbyReservation",
+        "UpdateSourceTarget":"{{$FullBaseDir}}csgo",
+        "UnzipUpdateSource":true,
+        "OverwriteExistingFiles":true,
+        "DeleteAfterExtract":true
+    },
+    {
+        "UpdateStageName":"NoLobbyReservation Gamedata Download",
+        "UpdateSourcePlatform":"All",
+        "UpdateSource":"FetchURL",
+        "UpdateSourceData":"https://raw.githubusercontent.com/eldoradoel/NoLobbyReservation/master/csgo/addons/sourcemod/gamedata/nolobbyreservation.games.txt",
+        "UpdateSourceTarget":"{{$FullBaseDir}}csgo/addons/sourcemod/gamedata",
+        "UnzipUpdateSource":true,
+        "OverwriteExistingFiles":true,
+        "DeleteAfterExtract":true
+    },
+    {
+        "UpdateStageName":"NoLobbyReservation Scripting Download",
+        "UpdateSourcePlatform":"All",
+        "UpdateSource":"FetchURL",
+        "UpdateSourceData":"https://raw.githubusercontent.com/eldoradoel/NoLobbyReservation/master/csgo/addons/sourcemod/scripting/nolobbyreservation.sp",
+        "UpdateSourceTarget":"{{$FullBaseDir}}csgo/addons/sourcemod/scripting",
+        "UnzipUpdateSource":true,
+        "OverwriteExistingFiles":true,
+        "DeleteAfterExtract":true
+    }
+]
